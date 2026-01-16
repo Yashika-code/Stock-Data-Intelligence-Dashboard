@@ -2,43 +2,31 @@
 
 ## 👋 About the Project
 
-This project was built as part of an **internship assignment** to understand how real-world stock market data can be collected, processed, and exposed using APIs.
+This project was developed as part of an internship assignment to understand how real-world stock market data can be fetched, processed, stored, and exposed using backend APIs.
 
-The main idea was to:
-
-* work with **real stock data**,
-* clean and analyze it using Python,
-* build **REST APIs**, and
-* (optionally) visualize the data in a simple way.
-
-The project focuses more on **backend logic and data handling**, with a lightweight frontend for visualization.
+The project focuses mainly on **backend development**, data handling, and API design using FastAPI.
 
 ---
 
 ## 🚀 What This Project Does
 
-* Fetches real **NSE stock data** (INFY, TCS, RELIANCE) using `yfinance`
-* Cleans and processes the data using **Pandas**
-* Calculates important stock metrics like:
+* Fetches real stock market data for selected companies (INFY, TCS, RELIANCE) using **yfinance**
+* Cleans and processes stock price data using **Pandas**
+* Stores processed stock data in a **SQLite database**
+* Exposes stock data through **FastAPI-based REST APIs**
+* Provides interactive API documentation using **Swagger UI**
 
-  * Daily Return
-  * 7-day Moving Average
-  * 52-week High & Low
-  * **Volatility Score (custom metric)**
-* Stores processed data in a **SQLite database**
-* Provides data through **FastAPI-based REST APIs**
-* Includes a simple **HTML + Chart.js dashboard** to visualize stock prices
+> Note: The primary focus of this project is backend functionality. Frontend visualization is minimal.
 
 ---
 
 ## 🛠 Technologies Used
 
 * **Python**
-* **FastAPI** – for building APIs
+* **FastAPI** – REST API framework
 * **SQLite** – lightweight database
-* **Pandas & NumPy** – data processing and calculations
+* **Pandas & NumPy** – data processing
 * **yfinance** – fetching stock market data
-* **Chart.js** – basic frontend visualization
 
 ---
 
@@ -48,14 +36,14 @@ The project focuses more on **backend logic and data handling**, with a lightwei
 stock-dashboard/
 │
 ├── app/
-│   ├── main.py          # API routes and app logic
+│   ├── main.py          # FastAPI app and routes
 │   ├── database.py      # Database connection
-│   ├── models.py        # Database schema
-│   ├── data_loader.py   # Fetching & cleaning stock data
-│   ├── schemas.py       # API response structure
+│   ├── models.py        # Database models
+│   ├── data_loader.py   # Stock data fetching and cleaning
+│   ├── schemas.py       # API response schemas
 │
 ├── frontend/
-│   └── index.html       # Simple visualization dashboard
+│   └── index.html       # Basic frontend (optional / minimal)
 │
 ├── requirements.txt
 ├── README.md
@@ -76,11 +64,11 @@ cd stock-dashboard
 
 ```bash
 python -m venv venv
-venv\Scripts\activate      # Windows
+venv\Scripts\activate    # Windows
 # source venv/bin/activate   # Linux / Mac
 ```
 
-### 3️⃣ Install Required Libraries
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -102,12 +90,25 @@ uvicorn app.main:app --reload
 GET /companies
 ```
 
-### 📌 Get Last 30 Days Stock Data
+Returns the list of supported stock symbols.
+
+---
+
+### 📌 Get Stock Data
 
 ```
 GET /data/{symbol}
-Example: /data/INFY
 ```
+
+Example:
+
+```
+/data/INFY
+```
+
+Returns recent stock price data for the selected company.
+
+---
 
 ### 📌 Get Stock Summary
 
@@ -115,26 +116,19 @@ Example: /data/INFY
 GET /summary/{symbol}
 ```
 
-This returns:
+Returns:
 
-* 52-week High
-* 52-week Low
-* Average Closing Price
-* **Volatility Score**
-
-### 📌 Compare Two Stocks
-
-```
-GET /compare?symbol1=INFY&symbol2=TCS
-```
+* 52-week high
+* 52-week low
+* Average closing price
 
 ---
 
 ## 📘 API Documentation
 
-FastAPI automatically provides Swagger documentation.
+FastAPI provides built-in interactive documentation.
 
-Open this in browser:
+Open in browser:
 
 ```
 http://127.0.0.1:8000/docs
@@ -142,44 +136,30 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 📈 Frontend Dashboard
+## 📈 Frontend
 
-A basic frontend is included for visualization.
-
-Steps:
-
-1. Open `frontend/index.html` in browser
-2. Select a company
-3. View the closing price trend on a line chart
-
-The frontend fetches data directly from the backend APIs.
-
----
-
-## 💡 Custom Metric – Volatility Score
-
-To add some creativity, a **Volatility Score** is calculated using the standard deviation of daily returns.
-
-This helps understand how much a stock price fluctuates and gives a rough idea of risk.
+A very basic frontend structure is included in the project.
+At present, the frontend is **minimal and optional**, and the main interaction with the project is through the backend APIs and Swagger UI.
 
 ---
 
 ## 🔮 Possible Improvements
 
-If extended further, this project can include:
-
-* Cloud deployment (Render / Oracle Cloud)
-* Basic ML-based price prediction
-* Docker support
-* Performance optimizations like caching
+* Add advanced metrics like volatility and moving averages
+* Stock comparison APIs
+* Full frontend dashboard with charts
+* Cloud deployment
+* Dockerization
 
 ---
 
 ## ✅ Conclusion
 
-This project helped me understand:
+This project helped me gain practical experience with:
 
 * Working with real financial data
-* Data cleaning and analysis using Pandas
-* Designing clean REST APIs
-* Basic data visualization
+* Data cleaning and processing using Pandas
+* Designing REST APIs with FastAPI
+* Database integration using SQLite
+
+---
