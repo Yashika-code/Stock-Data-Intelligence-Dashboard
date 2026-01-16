@@ -56,7 +56,7 @@ stock-dashboard/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/Yashika-code/Stock-Data-Intelligence-Dashboard.git
 cd stock-dashboard
 ```
 
